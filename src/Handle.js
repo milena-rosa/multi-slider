@@ -54,13 +54,7 @@ export default class Handle extends React.Component {
           r={size - strokeWidth}
           fill={bg}
         />
-        <circle
-          key="3"
-          cx={x}
-          cy={y}
-          r={innerRadius}
-          fill={active ? bg : color}
-        />
+        <circle key="3" cx={x} cy={y} r={innerRadius} fill={active ? bg : color} />
       </g>
     );
   }

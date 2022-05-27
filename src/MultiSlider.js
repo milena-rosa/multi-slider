@@ -61,7 +61,7 @@ export default class MultiSlider extends React.Component {
 
   sum() {
     // (might optimize this computation on values change if costy)
-    return this.props.values.reduce(function(a, b) {
+    return this.props.values.reduce(function (a, b) {
       return a + b;
     });
   }
@@ -72,7 +72,7 @@ export default class MultiSlider extends React.Component {
     var width = props.width;
     var padX = props.padX;
     var sum = this.sum();
-    return Math.round(padX + value * (width - 2 * padX) / sum);
+    return Math.round(padX + (value * (width - 2 * padX)) / sum);
   }
 
   reverseX(x) {
@@ -83,7 +83,7 @@ export default class MultiSlider extends React.Component {
     return sum * ((x - padX) / (width - 2 * padX));
   }
 
-  concernedEvent = e => {
+  concernedEvent = (e) => {
     var down = this.state.down;
     if (!useTouches()) {
       return e;
@@ -110,7 +110,7 @@ export default class MultiSlider extends React.Component {
       },
     });
   };
-  onHandleMove = e => {
+  onHandleMove = (e) => {
     var event = this.concernedEvent(e);
     if (!event) return;
     e.preventDefault();
@@ -124,8 +124,7 @@ export default class MultiSlider extends React.Component {
     var rightValue = values[rightIndex];
     var w = leftValue + rightValue;
     var offsetLeft = 0;
-    for (var i = 0; i < leftIndex; ++i)
-      offsetLeft += values[i];
+    for (var i = 0; i < leftIndex; ++i) offsetLeft += values[i];
     var left = Math.round(w * step(offsetLeft, offsetLeft + w, valuePos));
     var right = w - left;
 
@@ -136,14 +135,14 @@ export default class MultiSlider extends React.Component {
       this.props.onChange(values);
     }
   };
-  onHandleEnd = e => {
+  onHandleEnd = (e) => {
     var event = this.concernedEvent(e);
     if (!event) return;
     this.setState({
       down: null,
     });
   };
-  onHandleAbort = e => {
+  onHandleAbort = (e) => {
     var event = this.concernedEvent(e);
     if (!event) return;
     this.setState({
@@ -179,14 +178,7 @@ export default class MultiSlider extends React.Component {
       var toX = this.x(next);
       var color = colors[i % colors.length];
       tracks.push(
-        <Track
-          key={i}
-          color={color}
-          y={centerY}
-          lineWidth={trackSize}
-          fromX={fromX}
-          toX={toX}
-        />
+        <Track key={i} color={color} y={centerY} lineWidth={trackSize} fromX={fromX} toX={toX} />
       );
       if (i !== 0) {
         var handleEvents = {};
@@ -240,7 +232,9 @@ export default class MultiSlider extends React.Component {
     }
     return (
       <svg
-        ref={(node) => { this.root = node; }}
+        ref={(node) => {
+          this.root = node;
+        }}
         {...events}
         width="100%"
         height="100%"
